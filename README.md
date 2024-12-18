@@ -68,6 +68,6 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 
 ## Screenshots
 
-![List](screenshots/list.png "List View")
+![List](screenshots/list.jpeg "List View")
 
 ![Modal](screenshots/modal.png "Modal View")
