@@ -1,0 +1,44 @@
+import React from "react";
+import { Button } from "./Button";
+
+const baseURL = process.env.REACT_APP_BASE_URL;
+
+export const TodoDeleteButton = (props) => {
+  const handleDeleteTodo = async (todo) => {
+    props.setLoading(true);
+
+    try {
+      const url = `${baseURL}/Update?TodoId=${todo.id}`;
+
+      await fetch(url, {
+        method: "PATCH",
+        body: JSON.stringify({
+          TodoTitle: todo.value,
+          TodoDescription: todo.desc,
+          TodoId: todo.id,
+          TodoDeleted: true,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    } catch (error) {
+      console.error("Patch isteği sırasında hata oluştu:", error);
+    } finally {
+      await props.handleGetAll();
+      props.setLoading(false);
+    }
+  };
+
+  if (props.todo.isDeleted) {
+    return <></>;
+  }
+  return (
+    <Button
+      className="button-33"
+      onClick={() => handleDeleteTodo(props.todo)}
+    >
+      Sil
+    </Button>
+  );
+};
